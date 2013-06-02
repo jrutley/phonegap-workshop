@@ -37,7 +37,13 @@ var EmployeeView = function(employee) {
 		phoneNumbers[0] = new ContactField('work', employee.officePhone, false);
 		phoneNumbers[1] = new ContactField('mobile', employee.cellPhone, true);
 		contact.phonenumbers = phonenumbers;
-		contact.save();
+		contact.save(function(contact){
+				app.showAlert("Contacts was successfully saved", "Saved");
+			},
+			function(contactError){
+				app.showAlert("Error saving with error <<" + contactError + ">>", "Error");
+			}
+		);
 		return false;
 	};
 	
