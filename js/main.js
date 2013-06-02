@@ -34,7 +34,9 @@ var app = {
 	route: function() {
 		var hash = window.location.hash;
 		if(!hash) {
-			$('body').html(new HomeView(this.store).render().el);
+			var view = new HomeView(this.store);
+			$('body').html(view.render().el);
+			view.findByName();
 			return;
 		}
 		var match = hash.match(app.detailsURL);
@@ -51,7 +53,6 @@ var app = {
 		this.registerEvents();
         this.store = new MemoryStore(function() {
 			self.route();
-			//$('body').html(new HomeView(self.store).render().el);
 		});
     }
 };
